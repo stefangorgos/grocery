@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="grosery.model.Comment"%>
-<%@page import="grosery.repository.CommentRepository"%>
+<%@page import="grocery.model.Comment"%>
+<%@page import="grocery.repository.CommentRepository"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>

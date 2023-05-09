@@ -1,4 +1,4 @@
-package grosery.repository;
+package grocery.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,9 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import grosery.model.Comment;
-import grosery.model.Product;
-import grosery.utils.DataBaseConnection;
+import grocery.model.Comment;
+import grocery.model.Product;
+import grocery.utils.DataBaseConnection;
 
 public class CommentRepository {
 	private Connection connection;

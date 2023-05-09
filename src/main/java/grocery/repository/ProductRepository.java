@@ -1,4 +1,4 @@
-package grosery.repository;
+package grocery.repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,14 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import grosery.model.Product;
-import grosery.model.ProductRetiree;
+import grocery.model.Product;
+import grocery.model.ProductRetiree;
 
 public class ProductRepository {
 	private Connection connection;
 	
 	public ProductRepository() {
-		connection = grosery.utils.DataBaseConnection.getConnnection();
+		connection = grocery.utils.DataBaseConnection.getConnnection();
 	}
 	public Product createProduct(Product product) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO products (name, price, in_stock) VALUES (?, ?, ?) RETURNING id");

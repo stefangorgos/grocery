@@ -1,4 +1,4 @@
-package grosery.repository;
+package grocery.repository;
 
 import static org.junit.Assert.assertTrue;
 
@@ -7,8 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import grosery.model.Product;
-import grosery.model.ProductRetiree;
+import grocery.model.Product;
+import grocery.model.ProductRetiree;
+import grocery.repository.ProductRepository;
 
 public class ProductRepositoryTest {
 	

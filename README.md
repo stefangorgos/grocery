@@ -1,1 +1,1 @@
-# grosery
+# grocery

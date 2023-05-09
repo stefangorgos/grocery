@@ -1,6 +1,6 @@
 <%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="grosery.model.Comment"%>
-<%@page import="grosery.repository.CommentRepository"%>
+<%@page import="grocery.model.Comment"%>
+<%@page import="grocery.repository.CommentRepository"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html>
@@ -27,34 +27,34 @@
 
   <!-- fonts style -->
   <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan|Poppins:400,600,700&display=swap" rel="stylesheet">
+  
   <!-- Custom styles for this template -->
-  <link href="css/style.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
   <!-- responsive style -->
-  <link href="css/responsive.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/responsive.css" />
 </head>
 
 <body class="sub_page">
   <div class="hero_area">
   	<%@include file="includes/menu.jsp" %>
   </div>
-
-
-Current date: <%=new Date() %>
-<table border="1" cellpadding="0" cellspacing="0">
-	<thead>
-		<tr style="border-style: solid; font-weight: bolder;"><td style="padding: 0 5px 0 5px;">#</td><td style="padding: 0 5px 0 5px;">Date</td><td style="padding: 0 5px 0 5px;">Text</td><td style="padding: 0 5px 0 5px;">Rating</td></tr>
-	</thead>
-	
-	<tbody>
-	<% 
-	CommentRepository commentRepository = new CommentRepository();
-	List<Comment> comments = commentRepository.getComments();
-	int i = 1;
-	for (Comment comment : comments) { %>
-		<tr><td style="text-align: right; padding: 0 3px 0 3px;"><%=i++%></td><td><%=comment.getDate()%></td><td><%=comment.getText()%></td><td style="text-align: right; padding: 0 3px 0 3px;"><%=comment.getRating()%></td></tr>
-	<%}%>
-	</tbody>
-</table>
+  <div class="container">
+	<table class="styled-table">
+		<thead >
+			<tr><td>#</td><td>Date</td><td>Text</td><td>Rating</td></tr>
+		</thead>
+		
+		<tbody class="price_container">
+		<% 
+		CommentRepository commentRepository = new CommentRepository();
+		List<Comment> comments = commentRepository.getComments();
+		int i = 1;
+		for (Comment comment : comments) { %>
+			<tr <%=(i==5) ? "class=\"active-row\"" : "" %>><td style="text-align: right;"><%=i++%></td><td><%=comment.getDate()%></td><td><%=comment.getText()%></td><td style="text-align: right;"><%=comment.getRating()%></td></tr>
+		<%}%>
+		</tbody>
+	</table>
+  </div>
 Total comments: <%=new CommentRepository().getComments().size() %>
   <!-- item section -->
 

@@ -1,4 +1,4 @@
-package grosery.repository;
+package grocery.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -10,8 +10,10 @@ import java.util.List;
 
 import org.junit.Test;
 
-import grosery.model.Comment;
-import grosery.model.Product;
+import grocery.model.Comment;
+import grocery.model.Product;
+import grocery.repository.CommentRepository;
+import grocery.repository.ProductRepository;
 
 public class CommentRepositoryTest {
 	

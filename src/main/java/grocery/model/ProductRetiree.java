@@ -1,4 +1,4 @@
-package grosery.model;
+package grocery.model;
 
 public class ProductRetiree extends Product {
 	private double discount;

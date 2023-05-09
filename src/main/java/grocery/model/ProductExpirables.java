@@ -1,4 +1,4 @@
-package grosery.model;
+package grocery.model;
 
 import java.time.LocalDate;
 

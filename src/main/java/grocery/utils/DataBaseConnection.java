@@ -1,4 +1,4 @@
-package grosery.utils;
+package grocery.utils;
 
 import java.sql.Connection;
 import java.sql.Statement;
@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataBaseConnection {
-	static final String DB_URL = "jdbc:postgresql://localhost:5432/grosery";
+	static final String DB_URL = "jdbc:postgresql://localhost:5432/grocery";
 	static final String USER = "postgres";
 	static final String PASS = "postgres";
 	
