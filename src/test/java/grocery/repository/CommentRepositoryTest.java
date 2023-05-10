@@ -12,8 +12,6 @@ import org.junit.Test;
 
 import grocery.model.Comment;
 import grocery.model.Product;
-import grocery.repository.CommentRepository;
-import grocery.repository.ProductRepository;
 
 public class CommentRepositoryTest {
 	

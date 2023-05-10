@@ -11,7 +11,7 @@
   <meta name="description" content="" />
   <meta name="author" content="" />
 
-  <title>Lodge</title>
+  <title>Grocery</title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />

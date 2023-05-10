@@ -8,14 +8,19 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import grocery.model.Comment;
 import grocery.model.Product;
 import grocery.utils.DataBaseConnection;
 
 public class CommentRepository {
 	private Connection connection;
+	private static final Logger logger = LoggerFactory.getLogger(CommentRepository.class);
 	
 	public CommentRepository() {
+		logger.info("Start CommentRepository");
 		connection = DataBaseConnection.getConnnection();
 	}
 	
