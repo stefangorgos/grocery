@@ -35,7 +35,7 @@
     <div class="container ">
       <div class="">
         <h2 class="">
-          Contact Us
+          New product
         </h2>
       </div>
 
@@ -45,20 +45,20 @@
         <div class="col-md-6">
           <form action="">
             <div>
-              <input type="text" placeholder="Name" />
+              <input type="text" placeholder="Denumire" />
             </div>
             <div>
-              <input type="email" placeholder="Email" />
+              <input type="email" placeholder="Pret" />
             </div>
-            <div>
-              <input type="text" placeholder="Phone" />
+            <div style="text-align: left;">
+              <input type="checkbox" style="text-align: left;"/>
             </div>
             <div>
               <input type="text" class="message-box" placeholder="Message" />
             </div>
             <div class="d-flex ">
               <button>
-                SEND
+                Save
               </button>
             </div>
           </form>

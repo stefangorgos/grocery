@@ -38,6 +38,7 @@
   <div class="hero_area">
   	<%@include file="includes/menu.jsp" %>
   </div>
+<!--   <section class="price_section layout_padding"> -->
   <div class="container">
 	<table class="styled-table">
 		<thead >
@@ -54,7 +55,13 @@
 		<%}%>
 		</tbody>
 	</table>
+	<div class="d-flex justify-content-left price_section">
+		<a class="price_btn" href="product.jsp">New Product</a>
+	</div>
+      
+	
   </div>
+<!--   </section> -->
 Total comments: <%=new CommentRepository().getComments().size() %>
   <!-- item section -->
 
@@ -178,9 +185,9 @@ Total comments: <%=new CommentRepository().getComments().size() %>
           </div>
         </div>
       </div>
-      <div class="d-flex justify-content-left">
-        <a class="price_btn" href="product.jsp">New Product</a>
-      </div>
+<!--       <div class="d-flex justify-content-left"> -->
+<!--         <a class="price_btn" href="product.jsp">New Product</a> -->
+<!--       </div> -->
     </div>
   </section>
 

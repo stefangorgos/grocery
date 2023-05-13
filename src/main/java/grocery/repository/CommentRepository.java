@@ -20,7 +20,7 @@ public class CommentRepository {
 	private static final Logger logger = LoggerFactory.getLogger(CommentRepository.class);
 	
 	public CommentRepository() {
-		logger.info("Start CommentRepository");
+		logger.debug("Start CommentRepository");
 		connection = DataBaseConnection.getConnnection();
 	}
 	

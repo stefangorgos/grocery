@@ -1,9 +1,13 @@
-<%@page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@page import="grocery.model.Comment"%>
-<%@page import="grocery.repository.CommentRepository"%>
-<%@page import="java.util.Date"%>
-<%@page import="java.util.List"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="grocery.model.Comment"%>
+<%@ page import="grocery.repository.CommentRepository"%>
+<%@ page import="java.util.Date"%>
+<%@ page import="java.util.List"%>
+
+<jsp:useBean id="commentRepositoryBean" class="grocery.repository.CommentRepository"></jsp:useBean>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "https://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
@@ -34,30 +38,27 @@
 </head>
 
 <body class="sub_page">
-  <div class="hero_area">
-  	<%@include file="includes/menu.jsp" %>
-  </div>
-
-
-Current date: <%=new Date() %>
-<table border="1" cellpadding="0" cellspacing="0">
-	<thead>
-		<tr style="border-style: solid; font-weight: bolder;"><td style="padding: 0 5px 0 5px;">#</td><td style="padding: 0 5px 0 5px;">Date</td><td style="padding: 0 5px 0 5px;">Text</td><td style="padding: 0 5px 0 5px;">Rating</td></tr>
-	</thead>
-	
-	<tbody>
-	<% 
-	CommentRepository commentRepository = new CommentRepository();
-	List<Comment> comments = commentRepository.getComments();
-	int i = 1;
-	for (Comment comment : comments) { %>
-		<tr><td style="text-align: right; padding: 0 3px 0 3px;"><%=i++%></td><td><%=comment.getDate()%></td><td><%=comment.getText()%></td><td style="text-align: right; padding: 0 3px 0 3px;"><%=comment.getRating()%></td></tr>
-	<%}%>
-	</tbody>
-</table>
+	<div class="hero_area">
+		<%@include file="includes/menu.jsp" %>
+	</div>
+	<div class="container">
+		<table class="styled-table">
+			<thead>
+				<tr><td>#</td><td>Date</td><td>Text</td><td>Rating</td></tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${commentRepositoryBean.comments}" var="comment" varStatus="i">
+					<tr><td style="text-align: right;">${i.index + 1}</td><td>${comment.date}</td><td>${comment.text}</td><td style="text-align: right;">${comment.rating}</td></tr>
+				</c:forEach>
+			</tbody>
+		</table>
+		<div class="d-flex justify-content-left">
+			<a class="price_btn" href="product.jsp">New Product</a>
+		</div>
+	</div>
 Total comments: <%=new CommentRepository().getComments().size() %>
-  <!-- item section -->
 
+  <!-- item section -->
   <div class="item_section layout_padding2">
     <div class="container">
       <div class="item_container">
