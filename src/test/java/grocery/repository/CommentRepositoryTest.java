@@ -60,4 +60,31 @@ public class CommentRepositoryTest {
 		comment = commentRepository.persisteComment(comment);
 		assertTrue(comment.getId() > 1);
 	}
+	
+	@Test
+	public void testUpdateComment() throws SQLException {
+		ProductRepository productRepository = new ProductRepository();
+		CommentRepository commentRepository = new CommentRepository();
+		Comment comment = new Comment();
+		comment.setText("NU merita a fi \"Prezident\"");
+		comment.setDate(new Date());
+		comment.setRating(7);
+		comment.setId(18);
+		Product product = productRepository.readProduct(3);
+		comment.setProduct(product);
+		int rowsInserted = commentRepository.updateComment(comment);
+		assertEquals(1, rowsInserted);
+	}
+
+	@Test
+	public void testDeleteComment() throws SQLException {
+		CommentRepository commentRepository = new CommentRepository();
+		commentRepository.deleteCommentById(23);
+	}
+	
+	@Test
+	public void testDeleteCommentByProductId() throws SQLException {
+		CommentRepository commentRepository = new CommentRepository();
+		commentRepository.deleteCommentsByProductId(8);
+	}
 }

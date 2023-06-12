@@ -107,4 +107,20 @@ public class CommentRepository {
 	    statement.setInt(1, productId);
 	    statement.execute();
 	}
+	
+	public void deleteCommentById(int commentId) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("DELETE FROM comments WHERE id = ?");
+		statement.setInt(1, commentId);
+		statement.execute();
+	}
+	
+	public int updateComment(Comment comment) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("UPDATE comments set product_id = ?, text = ?, date = ?, rating = ? where id = ?");
+		statement.setInt(1, comment.getProduct().getId());
+		statement.setString(2, comment.getText());
+		statement.setDate(3, new java.sql.Date(comment.getDate().getTime()));
+		statement.setDouble(4, comment.getRating().doubleValue());
+		statement.setInt(5, comment.getId());
+		return statement.executeUpdate();
+	} 
 }
