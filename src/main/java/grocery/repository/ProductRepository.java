@@ -70,13 +70,13 @@ public class ProductRepository {
 	    statement.setBoolean(3, product.getInStock());
 	    statement.setInt(4, product.getId());
 	    statement.execute();
-	        if (product instanceof ProductRetiree) {
-	            statement = connection.prepareStatement("UPDATE product_retirees SET discount=? WHERE id=?");
-	            statement.setDouble(1, ((ProductRetiree) product).getDiscount());
-	            statement.setInt(2, product.getId());
-	            statement.execute();
-	        }
-	    }
+        if (product instanceof ProductRetiree) {
+            statement = connection.prepareStatement("UPDATE product_retirees SET discount=? WHERE id=?");
+            statement.setDouble(1, ((ProductRetiree) product).getDiscount());
+            statement.setInt(2, product.getId());
+            statement.execute();
+        }
+    }
 	
 	public void deleteProduct(int productId) throws SQLException {
 	    PreparedStatement statement = connection.prepareStatement("DELETE FROM products WHERE id=?");

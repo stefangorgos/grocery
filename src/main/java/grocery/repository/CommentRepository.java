@@ -101,4 +101,10 @@ public class CommentRepository {
 		comment.setId(resultSet.getInt("id"));
 		return comment;
 	}
+	
+	public void deleteCommentsByProductId(int productId) throws SQLException {
+	    PreparedStatement statement = connection.prepareStatement("DELETE FROM comments WHERE product_id=?");
+	    statement.setInt(1, productId);
+	    statement.execute();
+	}
 }

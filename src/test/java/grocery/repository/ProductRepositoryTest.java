@@ -1,5 +1,6 @@
 package grocery.repository;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
@@ -9,27 +10,9 @@ import org.junit.Test;
 
 import grocery.model.Product;
 import grocery.model.ProductRetiree;
-import grocery.repository.ProductRepository;
 
 public class ProductRepositoryTest {
 	
-//	@Test
-//	public void testGetComments() throws SQLException {
-//		CommentRepository commentRepository = new CommentRepository();
-//		List<Comment> comments = commentRepository.getComments();
-//		assertTrue(comments.size() > 0);
-//		for(Comment comment : comments) {
-//			assertNotNull(comment.getProduct().getName());
-//		}
-//	}
-//	
-//	@Test
-//	public void testGetProductsWithComments() throws SQLException {
-//		CommentRepository commentRepository = new CommentRepository();
-//		List<Product> products = commentRepository.getProductsWithComments();
-//		assertTrue(products.size() > 0);
-//	}
-
 	@Test
 	public void testCreateProduct() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
@@ -50,14 +33,14 @@ public class ProductRepositoryTest {
 	public void testReadProducts() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
 		List<Product> products = productRepository.readProducts();
-		System.out.println(products);
+		assertTrue(products.size() > 0);
 	}
 	
 	@Test
 	public void testReadProduct() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
 		Product product = productRepository.readProduct(8);
-		System.out.println(product);
+		assertEquals(Integer.valueOf(8), product.getId());
 	}
 	
 	@Test
@@ -79,17 +62,9 @@ public class ProductRepositoryTest {
 	@Test
 	public void testDeleteProduct() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
-		productRepository.deleteProduct(1);
+		Product product = new Product("To be deleted", 23.75, false);
+		Product productSaved = productRepository.createProduct(product);
+		int productId = productSaved.getId();
+		productRepository.deleteProduct(productId);
 	}
-	
-//	@Test
-//	public void testPersisteComment() throws SQLException {
-//		CommentRepository commentRepository = new CommentRepository();
-//		Comment comment = new Comment();
-//		comment.setText("Merita mult a fi \"Prezident\"");
-//		comment.setDate(new Date());
-//		comment.setRating(8);
-//		comment = commentRepository.persisteComment(comment);
-//		assertTrue(comment.getId() > 1);
-//	}
 }
