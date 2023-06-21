@@ -5,6 +5,7 @@ public class OrderLines {
 	private Integer order_id;
 	private Integer product_id;
 	private Double purchase_price;
+	private Integer quantity;
 	
 	
 	public Integer getLines_id() {
@@ -31,6 +32,14 @@ public class OrderLines {
 	public void setPurchase_price(Double purchase_price) {
 		this.purchase_price = purchase_price;
 	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	
+	
 	
 	
 }
