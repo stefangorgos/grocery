@@ -2,6 +2,7 @@ package grocery.repository;
 
 import java.sql.Statement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,28 +21,50 @@ public class OrderRepository {
 	
 	public List<Order> getOrders() throws SQLException {
 		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("select orders.id as order_id, customer_id, date, order_lines.id as lines_id, order_lines.product_id, order_lines.purchase_price from orders join order_lines on orders.id = order_lines.order_id");
+		ResultSet resultSet = statement.executeQuery("select orders.id as order_id, customer_id, date, order_lines.id as lines_id, order_lines.product_id, order_lines.purchase_price from orders join order_lines on orders.id = order_lines.order_id order by purchase_price asc");
+		List<Object[]> resultSetAsList = new ArrayList<>();
+		while (resultSet.next()) {
+			Object[] row = new Object[6];
+			for (int i=0; i < 6; i++) {
+				row[i] = resultSet.getObject(i+1);
+			}
+			resultSetAsList.add(row);
+		}
+		
+		for (int i = 0; i < resultSetAsList.size() - 1; i++) {
+			for (int j = 0; j < resultSetAsList.size() - 1 - i; j++) {
+				Object[] x = resultSetAsList.get(j);
+				Object[] y = resultSetAsList.get(j+1);
+				Integer id = (Integer)x[0];
+				Integer id2 = (Integer)y[0];
+				if(id > id2) {
+					Object[] temp = resultSetAsList.get(j);
+					resultSetAsList.set(j, resultSetAsList.get(j+1));
+					resultSetAsList.set(j+1, temp);
+				}
+			}
+		}	
 		List<Order> orders = new ArrayList<>();
 		Order order = null;
 		OrderLines orderLines;
 		Integer previousOrderId = -1;
 		
-		while (resultSet.next()) {
-			final Integer currentOrderId = resultSet.getInt("order_id");
+		for(int i = 0; i < resultSetAsList.size() - 1; i++) {
+			final Integer currentOrderId = (Integer)resultSetAsList.get(i)[0];
 			if (!previousOrderId.equals(currentOrderId)) {
 				previousOrderId = currentOrderId;
 				order = new Order();
 				order.setOrderLines(new ArrayList<OrderLines>());
-				order.setId(resultSet.getInt("order_id"));
-				order.setCustomer_id(resultSet.getInt("customer_id"));
-				order.setDate(resultSet.getDate("date"));
+				order.setId((Integer)resultSetAsList.get(i)[0]);
+				order.setCustomer_id((Integer)resultSetAsList.get(i)[1]);
+				order.setDate((Date)resultSetAsList.get(i)[2]);
 				
 				orders.add(order);
 			}
 			orderLines = new OrderLines();
-			orderLines.setLines_id(resultSet.getInt("lines_id"));
-			orderLines.setProduct_id(resultSet.getInt("product_id"));
-			orderLines.setPurchase_price(resultSet.getDouble("purchase_price"));
+			orderLines.setLines_id((Integer)resultSetAsList.get(i)[3]);
+			orderLines.setProduct_id((Integer)resultSetAsList.get(i)[4]);
+			orderLines.setPurchase_price(Double.valueOf(resultSetAsList.get(i)[5].toString()));
 			order.getOrderLines().add(orderLines);
 					
 		}
