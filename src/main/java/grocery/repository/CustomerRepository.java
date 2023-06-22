@@ -1,6 +1,7 @@
 package grocery.repository;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,6 +17,15 @@ public class CustomerRepository {
 	public CustomerRepository() {
 		connection = grocery.utils.DataBaseConnection.getConnnection();
 	}
+	
+
+	public int addCustomer(Customer customer) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO customers (name, customer_since) VALUES (?, ?)");
+		statement.setString(1, customer.getName());
+		statement.setDate(2, new java.sql.Date(customer.getCustomerSince().getTime()));
+		return statement.executeUpdate();
+	}
+	
 	
 	public List<Customer> readCustomers() throws SQLException {
 		List<Customer> customers = new ArrayList<>();
@@ -53,9 +63,21 @@ public class CustomerRepository {
 			customer.setTotalSpent(resultSet.getDouble("total_spent"));
 			customers.add(customer);
 		}
-		
-		
 		return customers;
+	}
+	
+	public void updateCustomer(Customer customer) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("UPDATE customers set name = ?, customer_since = ? WHERE id = ?");
+		statement.setString(1, customer.getName());
+		statement.setDate(2, new java.sql.Date(customer.getCustomerSince().getTime()));
+		statement.setInt(3, customer.getId());
+		statement.executeUpdate();
+	}
+	
+	public void deleteCustomer(int customerId) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("DELETE FROM customers WHERE id=?");
+	    statement.setInt(1, customerId);
+	    statement.execute();
 	}
 	
 	
