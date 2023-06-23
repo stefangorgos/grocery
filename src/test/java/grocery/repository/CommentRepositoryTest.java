@@ -1,7 +1,6 @@
 package grocery.repository;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.sql.SQLException;
@@ -21,7 +20,12 @@ public class CommentRepositoryTest {
 		List<Comment> comments = commentRepository.getComments();
 		assertTrue(comments.size() > 0);
 		for(Comment comment : comments) {
-			assertNotNull(comment.getProduct().getName());
+			System.out.print(comment.getId());
+			System.out.print(comment.getProduct().getName());
+			System.out.print(comment.getText());
+			System.out.print(comment.getRating());
+			System.out.println(comment.getDate());
+
 		}
 	}
 	

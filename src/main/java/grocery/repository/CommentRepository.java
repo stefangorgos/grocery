@@ -26,7 +26,7 @@ public class CommentRepository {
 	
 	public List<Comment> getComments() throws SQLException {
 		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("select comments.id as comment_id, product_id, text, date, rating, name, price, in_stock from comments join products on comments.product_id = products.id"); 
+		ResultSet resultSet = statement.executeQuery("select comments.id as comment_id, product_id, text, date, rating, name, price, in_stock from comments join products on comments.product_id = products.id order by comments.id asc"); 
 		List<Comment> comments = new ArrayList<>();
 		Comment comment;
 		Product product;
@@ -82,7 +82,7 @@ public class CommentRepository {
 
 	public int addComment(Comment comment) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO comments (product_id, text, date, rating) VALUES (?, ?, ?, ?)");
-		statement.setInt(1, comment.getProduct().getId());
+		statement.setInt(1, comment.getProductId());
 		statement.setString(2, comment.getText());
 		statement.setDate(3, new java.sql.Date(comment.getDate().getTime()));
 		statement.setDouble(4, comment.getRating().doubleValue());

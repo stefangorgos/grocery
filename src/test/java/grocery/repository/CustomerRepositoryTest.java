@@ -39,6 +39,7 @@ public class CustomerRepositoryTest {
 		Date date = null;
 		try {
 			date = simpleDateFormat.parse("2023-05-01");
+			System.out.println(date);
 		} catch (ParseException e) {
 			// do nothing by design
 		}

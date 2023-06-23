@@ -1,10 +1,10 @@
 package grocery.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 public class ProductPerishables extends ProductExpirables {
 	private double dailyDiscount;
-    public ProductPerishables(int id, String name, double price, boolean inStock, LocalDate expirationDate, double dailyDiscount) {
+    public ProductPerishables(int id, String name, double price, boolean inStock, Date expirationDate, double dailyDiscount) {
         super(id, name, price, inStock, expirationDate);
         this.setDailyDiscount(dailyDiscount);
     }

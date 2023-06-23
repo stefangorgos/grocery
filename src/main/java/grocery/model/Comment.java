@@ -7,6 +7,7 @@ public class Comment {
 	private String text;
 	private Date date;
 	private Number rating;
+	private Integer productId;
 	private Product product;
 	
 	public Integer getId() {
@@ -40,6 +41,16 @@ public class Comment {
 	public void setRating(Number rating) {
 		this.rating = rating;
 	}
+	
+	
+
+	public Integer getProductId() {
+		return productId;
+	}
+
+	public void setProductId(Integer productId) {
+		this.productId = productId;
+	}
 
 	public Product getProduct() {
 		return product;
@@ -48,4 +59,5 @@ public class Comment {
 	public void setProduct(Product product) {
 		this.product = product;
 	}
+	
 }

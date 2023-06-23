@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<form action="ProductServlet" method="post">
+		<label for="name">Nume</label>
+		<input type="text" name="name"/><br>
+		<label for="price">Pret</label>
+		<input type="number" name="price"/><br>
+		<label for="instock">In stock</label>
+		<input type="checkbox" name="instock" value="true"/><br>
+		
+		<!--
+		<input type="radio" name="tip" value="simple"/>
+		<label for="tip">Simplu</label><br>
+		<input type="radio" name="tip" value="retirees"/>
+		<label for="tip">Pensionari</label><br>
+		<input type="radio" name="tip" value="expirables"/>
+		<label for="tip">Expirabil</label><br>
+		<input type="radio" name="tip" value="perishables"/>
+		<label for="tip">Perisabile</label><br>
+		-->
+		
+		<label for="discount">Discount pensionari</label>
+		<input type="number" name="discount"/><br>
+		
+		<input type="submit" value="Submit"/>
+	</form>
+</body>
+</html>

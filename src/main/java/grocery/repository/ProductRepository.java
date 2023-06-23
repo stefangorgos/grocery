@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import grocery.model.Product;
+import grocery.model.ProductExpirables;
+import grocery.model.ProductPerishables;
 import grocery.model.ProductRetiree;
 
 public class ProductRepository {
@@ -39,11 +41,25 @@ public class ProductRepository {
 	
 	public List<Product> readProducts() throws SQLException {
 		List<Product> products = new ArrayList<>();
-		Product product;
+		Product product = null;
 		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("SELECT * FROM products left join product_retirees on products.id = product_retirees.id;");
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM products \r\n"
+				+ "left join product_retirees on products.id = product_retirees.id \r\n"
+				+ "left join product_expirables on products.id = product_expirables.id\r\n"
+				+ "left join product_perishables on products.id = product_perishables.id\r\n"
+				+ "order by products.id asc");
 		while(resultSet.next()) {
-			product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"));
+			if (resultSet.getDouble("discount") != 0.0) {
+				product = new ProductRetiree(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDouble("discount"));
+			} else {
+				product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"));
+			}
+			if (resultSet.getDate("expiration_date") != null) {
+				product = new ProductExpirables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDate("expiration_date"));
+			}
+			if (resultSet.getDate("start_date") != null) {
+				product = new ProductPerishables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDate("expiration_date"), resultSet.getDouble("daily_discount"));
+			}
 			product.setId(resultSet.getInt("id"));
 			products.add(product);		
 		};
