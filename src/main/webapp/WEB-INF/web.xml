@@ -10,4 +10,13 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.jsf</url-pattern>
   </servlet-mapping>
+  <filter>
+    <display-name>DubleWordFilter</display-name>
+    <filter-name>DubleWordFilter</filter-name>
+    <filter-class>grocery.servlet.DubleWordFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>DubleWordFilter</filter-name>
+    <url-pattern>/CommentServlet</url-pattern>
+  </filter-mapping>
 </web-app>

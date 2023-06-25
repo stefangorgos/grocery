@@ -1,0 +1,24 @@
+[{
+	"id":123,
+	"name":"Pankaj Kumar",
+	"permanent":true,
+	"address":{
+			"street":"El Camino Real",
+			"city":"San Jose",
+			"zipcode":95014
+		},
+	"phoneNumbers":[9988664422, 1234567890],
+	"role":"Developer"
+},
+{
+	"id":124,
+	"name":"Gorgos Ion",
+	"permanent":true,
+	"address":{
+			"street":"Albisoara, 80/2, 65",
+			"city":"Chisinau",
+			"zipcode":2005
+		},
+	"phoneNumbers":[9988662410, 1234503240],
+	"role":"Developer"
+}]
