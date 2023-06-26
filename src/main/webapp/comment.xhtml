@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{commentService.init()}"/>
+    <f:event type="preRenderView" listener="#{productService.init()}"/>
+</f:metadata>
+
+<body>
+<h:form id="comments">
+    <h:panelGrid id="theGrid" columns="2" border="1">
+        <h:outputText value="Product"/>
+		<h:selectOneMenu value="#{commentService.selectedProduct.id}">
+			<f:selectItems value="#{productService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/>
+		</h:selectOneMenu>
+    
+        <h:outputText value="Comment"/>
+        <h:inputText id="text" value="#{commentService.selectedComment.text}"/>
+
+        <h:outputText value="Rating"/>
+        <h:inputText  id="rating" value="#{commentService.selectedComment.rating}" converter="javax.faces.Number"/>
+
+        <h:commandButton value="Save #{msg['label.saveButton']}" 
+        	action="#{commentService.saveComment}"
+            process="@this"/>
+    </h:panelGrid>
+</h:form>
+
+</body>
+</html>
+

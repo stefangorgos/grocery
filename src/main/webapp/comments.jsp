@@ -44,11 +44,11 @@
 	<div class="container">
 		<table class="styled-table">
 			<thead>
-				<tr><td>#</td><td>Date</td><td>Text</td><td>Rating</td></tr>
+				<tr><td>#</td><td>Date</td><td>Produs</td><td>Text</td><td>Rating</td></tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${commentRepositoryBean.comments}" var="comment" varStatus="i">
-					<tr><td style="text-align: right;">${i.index + 1}</td><td>${comment.date}</td><td>${comment.text}</td><td style="text-align: right;">${comment.rating}</td></tr>
+					<tr><td style="text-align: right;">${i.index + 1}</td><td>${comment.date}</td><td>${comment.product.name}</td><td>${comment.text}</td><td style="text-align: right;">${comment.rating}</td></tr>
 				</c:forEach>
 			</tbody>
 		</table>
