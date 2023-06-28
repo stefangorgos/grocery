@@ -16,7 +16,7 @@
 <h:form id="comments">
     <h:panelGrid id="theGrid" columns="2" border="1">
         <h:outputText value="Product"/>
-		<h:selectOneMenu value="#{commentService.selectedProduct.id}">
+		<h:selectOneMenu value="#{commentService.selectedComment.productId}">
 			<f:selectItems value="#{productService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/>
 		</h:selectOneMenu>
     

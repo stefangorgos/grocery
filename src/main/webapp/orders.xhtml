@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{orderService.init()}"/>
+</f:metadata>
+<body>
+	<h:dataTable border="1" value="#{orderService.orders}" var="o">
+		<h:column><f:facet name="header">Order ID</f:facet>
+			<h:outputLink value="test.jsf">test
+				<f:param name="selectedOrderId" value="#{o.id}"></f:param>
+			</h:outputLink>
+		</h:column>
+		<h:column><f:facet name="header">Customer</f:facet>
+			<h:outputText value="#{o.customerName}"></h:outputText>
+		</h:column>
+		<h:column><f:facet name="header">Date</f:facet>
+			<h:outputText value="#{o.date}"></h:outputText>
+		</h:column>
+		<h:column>
+			<h:commandLink action="#{orderService.edit}" actionListener="#{orderService.selectedOrder.id = o.id}"><!-- 
+			<f:actionListener ></f:actionListener> -->
+			</h:commandLink>
+
+		</h:column>
+
+	</h:dataTable>
+
+</body>
+</html>
+

@@ -35,11 +35,10 @@ public class CommentService {
 	}
 	
 	public String saveComment() throws IOException {
-		selectedComment.setProductId(selectedProduct.getId());
 		selectedComment.setDate(new Date());
 		try {
 			commentRepository.persisteComment(selectedComment);
-			return "comments.jsf";
+			return "comments";
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}

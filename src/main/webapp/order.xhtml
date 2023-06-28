@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{orderService.init()}"/>
+</f:metadata>
+<body>
+<h:form id="orders">
+<h:outputText value="#{orderService.selectedOrder.id}" rendered="#{not empty orderService.selectedOrder.id}"></h:outputText>
+    <h:panelGrid id="grid1" columns="2" border="0">
+        <h:outputText value="Customer"/>
+		<h:selectOneMenu value="#{orderService.selectedOrder.customerId}" rendered="#{empty orderService.selectedOrder.id}">
+			<f:selectItems value="#{orderService.customers}" var="customer" itemLabel="#{customer.name}" itemValue="#{customer.id}"/>
+		</h:selectOneMenu>
+		<h:outputText value="#{orderService.selectedOrder.customerId}" rendered="#{not empty orderService.selectedOrder.id}"/>
+		
+		<h:outputText value="Date" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:outputText value="#{orderService.selectedOrder.date}" rendered="#{not empty orderService.selectedOrder.id}"/>
+		
+		
+        <h:commandButton value="Save #{msg['label.saveButton']}" 
+        	rendered="#{empty orderService.selectedOrder.id}"
+        	action="#{orderService.saveOrder}"
+            process="@this"/>
+	</h:panelGrid>
+	
+	<h:dataTable border="1" rendered="#{not empty orderService.selectedOrder.id}" value="#{orderService.orderLines}" var="o">
+		<h:column><f:facet name="header">Line Id</f:facet>
+		<h:outputText value="#{o.id}"></h:outputText>
+		</h:column>
+		<h:column><f:facet name="header">Product Id</f:facet>
+		<h:outputText value="#{o.productId}"></h:outputText>
+		</h:column>
+		<h:column><f:facet name="header">Purchase Price</f:facet>
+		<h:outputText value="#{o.purchasePrice}"></h:outputText>
+		</h:column>
+		<h:column><f:facet name="header">Quantity</f:facet>
+		<h:outputText value="#{o.quantity}"></h:outputText>
+		</h:column>
+
+	</h:dataTable>
+	
+	<h:panelGrid id="theGrid2" columns="2" border="0">	
+		<h:outputText value="Product" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:selectOneMenu value="#{orderService.selectedOrderLine.productId}" rendered="#{not empty orderService.selectedOrder.id}">
+			<f:selectItems value="#{orderService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/>
+		</h:selectOneMenu>
+		
+		<h:outputText value="Purchase Price" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:inputText value="#{orderService.selectedOrderLine.purchasePrice}" rendered="#{not empty orderService.selectedOrder.id}"></h:inputText>
+		
+		<h:outputText value="Quantity" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:inputText value="#{orderService.selectedOrderLine.quantity}" rendered="#{not empty orderService.selectedOrder.id}"></h:inputText>
+            
+        <h:commandButton value="Save order lines #{msg['label.saveButton']}" 
+        	rendered="#{not empty orderService.selectedOrder.id}"
+        	action="#{orderService.saveOrderLine}"
+            process="@this"/>
+    </h:panelGrid>
+</h:form>
+
+</body>
+</html>
+

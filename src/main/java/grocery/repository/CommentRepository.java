@@ -91,7 +91,7 @@ public class CommentRepository {
 
 	public Comment persisteComment(Comment comment) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("INSERT INTO comments (product_id, text, date, rating) VALUES (?, ?, ?, ?) RETURNING id");
-		statement.setInt(1, comment.getProduct().getId());
+		statement.setInt(1, comment.getProductId());
 		statement.setString(2, comment.getText());
 		statement.setDate(3, new java.sql.Date(comment.getDate().getTime()));
 		statement.setDouble(4, comment.getRating().doubleValue());

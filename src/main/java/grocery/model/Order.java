@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class Order {
 	private Integer id;
-	private Integer customer_id;
+	private Integer customerId;
+	private String customerName;
 	private Date date;
-	private ArrayList<OrderLines> orderLines;
+	private ArrayList<OrderLine> orderLine;
 	
 	public Integer getId() {
 		return id;
@@ -15,11 +16,11 @@ public class Order {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public Integer getCustomer_id() {
-		return customer_id;
+	public Integer getCustomerId() {
+		return customerId;
 	}
-	public void setCustomer_id(Integer customer_id) {
-		this.customer_id = customer_id;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 	public Date getDate() {
 		return date;
@@ -27,11 +28,17 @@ public class Order {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public ArrayList<OrderLines> getOrderLines() {
-		return orderLines;
+	public ArrayList<OrderLine> getOrderLines() {
+		return orderLine;
 	}
-	public void setOrderLines(ArrayList<OrderLines> orderLines) {
-		this.orderLines = orderLines;
+	public void setOrderLines(ArrayList<OrderLine> orderLine) {
+		this.orderLine = orderLine;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
 
 	

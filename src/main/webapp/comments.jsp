@@ -53,7 +53,7 @@
 			</tbody>
 		</table>
 		<div class="d-flex justify-content-left">
-			<a class="price_btn" href="product.jsp">New Product</a>
+			<a class="price_btn" href="comment.jsf">New Comment</a>
 		</div>
 	</div>
 Total comments: <%=new CommentRepository().getComments().size() %>
