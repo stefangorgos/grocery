@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productService.init()}"/>
+</f:metadata>
+
+<body>
+
+	<h:dataTable border="1" value="#{productService.products}" var="p">
+	<h:column>
+		<f:facet name="header">Product ID</f:facet>
+		<h:outputText value="#{p.id}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Name</f:facet>
+		<h:outputText value="#{p.name}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Price</f:facet>
+		<h:outputText value="#{p.price}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">In stock</f:facet>
+		<h:outputText value="#{p.inStock}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Retiree Discount</f:facet>
+		<h:outputText value="#{p.discount}" rendered="#{p['class'].simpleName eq 'ProductRetiree'}"></h:outputText>
+		<h:outputText value="-" rendered="#{p['class'].simpleName ne 'ProductRetiree'}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Expiration Date</f:facet>
+		<h:outputText value="#{p.expirationDate}" rendered="#{p['class'].simpleName eq 'ProductExpirables' or p['class'].simpleName eq 'ProductPerishables'}"></h:outputText>
+		<h:outputText value="-" rendered="#{p['class'].simpleName ne 'ProductExpirables' and p['class'].simpleName ne 'ProductPerishables'}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Daily Discount</f:facet>
+		<h:outputText value="#{p.dailyDiscount}" rendered="#{p['class'].simpleName eq 'ProductPerishables'}"></h:outputText>
+		<h:outputText value="-" rendered="#{p['class'].simpleName ne 'ProductPerishables'}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Product Type</f:facet>
+		<h:outputText value="#{p['class'].simpleName}"></h:outputText>
+	</h:column>
+	
+	
+	
+	</h:dataTable>
+
+</body>
+</html>

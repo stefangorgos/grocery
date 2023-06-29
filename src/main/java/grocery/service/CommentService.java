@@ -34,6 +34,14 @@ public class CommentService {
 		}
 	}
 	
+	public List<Comment> getCommentsByProduct(int productId) {
+		try {
+			return commentRepository.getCommentsByProduct(productId);
+		} catch (SQLException e) {
+			return new ArrayList<>();
+		}
+	}
+	
 	public String saveComment() throws IOException {
 		selectedComment.setDate(new Date());
 		try {

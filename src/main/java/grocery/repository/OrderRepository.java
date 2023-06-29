@@ -140,4 +140,17 @@ public class OrderRepository {
 			order.setId(resultSet.getInt("id"));
 		return order;
 	}
+	
+	public Order getOrderById(int selectedOrderId) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("select * from orders where id = ?");
+		statement.setInt(1, selectedOrderId);
+		statement.execute();
+		ResultSet resultSet = statement.getResultSet();
+		Order order = new Order();
+		order.setId(resultSet.getInt("id"));
+		order.setCustomerId(resultSet.getInt("customer_id"));
+		order.setDate(resultSet.getDate("date"));	
+		
+		return order;
+	}
 }

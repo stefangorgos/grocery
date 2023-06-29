@@ -49,6 +49,35 @@ public class CommentRepository {
 		return comments;
 	}
 	
+	public List<Comment> getCommentsByProduct(int productId) throws SQLException {
+		PreparedStatement statement = connection.prepareStatement("select comments.id as comment_id, product_id, text, date, rating, name, price, in_stock \r\n"
+				+ "from comments \r\n"
+				+ "join products on comments.product_id = products.id \r\n"
+				+ "where product_id = ?"); 
+		statement.setInt(1, productId);
+		ResultSet resultSet = statement.getResultSet();
+		List<Comment> comments = new ArrayList<>();
+		Comment comment;
+		Product product;
+		while (resultSet.next()) {
+			comment = new Comment();
+			comment.setId(resultSet.getInt("comment_id"));
+			comment.setText(resultSet.getString("text"));
+			comment.setDate(resultSet.getDate("date"));
+			comment.setRating(resultSet.getFloat("rating"));
+			
+			product = new Product();
+			product.setId(resultSet.getInt("product_id"));
+			product.setName(resultSet.getString("name"));
+			product.setPrice(resultSet.getDouble("price"));
+			product.setInStock(resultSet.getBoolean("in_stock"));
+			comment.setProduct(product);
+			
+			comments.add(comment);
+		}
+		return comments;
+	}
+	
 	public List<Product> getProductsWithComments() throws SQLException {
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("select products.id, name, price, in_stock, comments.id as comment_id, text, date, rating from products join comments on products.id = comments.product_id order by products.id asc"); 
