@@ -49,6 +49,21 @@ public class CommentRepository {
 		return comments;
 	}
 	
+	public Comment getCommentById(int commentId) throws SQLException{
+		Comment comment = new Comment();
+		PreparedStatement statement = connection.prepareStatement("select * from comments where id = ?"); 
+		statement.setInt(1, commentId);
+		statement.execute();
+		ResultSet resultSet = statement.getResultSet();
+		resultSet.next();
+		comment.setId(resultSet.getInt("id"));
+		comment.setProductId(resultSet.getInt("product_id"));;
+		comment.setText(resultSet.getString("text"));
+		comment.setRating(resultSet.getDouble("rating"));
+		comment.setDate(resultSet.getDate("date"));
+		return comment;
+	}
+	
 	public List<Comment> getCommentsByProduct(int productId) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("select comments.id as comment_id, product_id, text, date, rating, name, price, in_stock \r\n"
 				+ "from comments \r\n"
@@ -145,7 +160,7 @@ public class CommentRepository {
 	
 	public int updateComment(Comment comment) throws SQLException {
 		PreparedStatement statement = connection.prepareStatement("UPDATE comments set product_id = ?, text = ?, date = ?, rating = ? where id = ?");
-		statement.setInt(1, comment.getProduct().getId());
+		statement.setInt(1, comment.getProductId());
 		statement.setString(2, comment.getText());
 		statement.setDate(3, new java.sql.Date(comment.getDate().getTime()));
 		statement.setDouble(4, comment.getRating().doubleValue());

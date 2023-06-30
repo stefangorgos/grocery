@@ -4,6 +4,7 @@ public class OrderLine {
 	private Integer id;
 	private Integer orderId;
 	private Integer productId;
+	private String productName;
 	private Double purchasePrice;
 	private Integer quantity;
 	
@@ -37,6 +38,12 @@ public class OrderLine {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 	
 	

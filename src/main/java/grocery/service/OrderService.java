@@ -28,11 +28,12 @@ public class OrderService {
 	private Customer selectedCustomer;
 	private List<Customer> customers;
 	private List<Product> products; 
-	private Integer selectedOrderId;
 	
 	public void init() throws SQLException {
 		if (selectedOrder.getId() == null) {
 			selectedOrder = new Order();
+		} else {
+			selectedOrder = orderRepository.getOrderById(selectedOrder.getId());
 		}
 		selectedCustomer = new Customer();
 		selectedOrderLine = new OrderLine();	
@@ -130,29 +131,5 @@ public class OrderService {
 	public void setProducts(List<Product> products) {
 		this.products = products;
 	}
-
-
-
-	public Integer getSelectedOrderId() {
-		return selectedOrderId;
-	}
-
-
-
-	public void setSelectedOrderId(Integer selectedOrderId) {
-		this.selectedOrderId = selectedOrderId;
-		try {
-			this.selectedOrder = orderRepository.getOrderById(selectedOrderId);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	
-	
-	
-	
-	
 
 }

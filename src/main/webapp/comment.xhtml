@@ -10,11 +10,14 @@
 <f:metadata>
     <f:event type="preRenderView" listener="#{commentService.init()}"/>
     <f:event type="preRenderView" listener="#{productService.init()}"/>
+    <f:viewParam name="selectedCommentId" value="#{commentService.selectedComment.id}"/>
 </f:metadata>
 
 <body>
 <h:form id="comments">
     <h:panelGrid id="theGrid" columns="2" border="1">
+    	<h:outputText value="Comment ID"></h:outputText>
+		<h:outputText value="#{commentService.selectedComment.id}"></h:outputText>
         <h:outputText value="Product"/>
 		<h:selectOneMenu value="#{commentService.selectedComment.productId}">
 			<f:selectItems value="#{productService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/>
@@ -28,10 +31,16 @@
 
         <h:commandButton value="Save #{msg['label.saveButton']}" 
         	action="#{commentService.saveComment}"
-            process="@this"/>
+            process="@this"
+            rendered="#{empty commentService.selectedComment.id}"/>
+		    
+		<h:commandButton value="Update" 
+		action="#{commentService.updateComment}"
+		process="@this"
+		rendered="#{not empty commentService.selectedComment.id}"/>
     </h:panelGrid>
 </h:form>
-
+<h:outputText value="#{selectedComment.text}"></h:outputText>
 </body>
 </html>
 

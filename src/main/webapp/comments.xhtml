@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{orderService.init()}"/>
+</f:metadata>
+<body>
+
+	<h:dataTable border="1" value="#{commentService.comments}" var="c">
+	
+	<h:column>
+		<f:facet name="header">ID</f:facet>
+			<h:outputLink value="comment.jsf"> <h:outputText value="#{c.id}"/>
+				<f:param name="selectedCommentId" value="#{c.id}"></f:param>
+			</h:outputLink>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Product</f:facet>
+		<h:outputText value="#{c.product.name}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Text</f:facet>
+		<h:outputText value="#{c.text}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Date</f:facet>
+		<h:outputText value="#{c.date}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">Rating</f:facet>
+		<h:outputText value="#{c.rating}"></h:outputText>
+	</h:column>
+	</h:dataTable>
+
+</body>
+</html>

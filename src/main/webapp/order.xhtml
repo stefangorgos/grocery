@@ -2,29 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
     <title><h:outputText value="#{msg['message.welcome']}"/></title>
 </h:head>
 
 <f:metadata>
     <f:event type="preRenderView" listener="#{orderService.init()}"/>
+    <f:viewParam name="selectedOrderId" value="#{orderService.selectedOrder.id}"/>
 </f:metadata>
 <body>
-<c:set var="orderId" value="#{param['selectedOrderId']}"/>
-<h:outputText value="#{orderId}"></h:outputText>
-#{orderService.setSelectedOrderId(orderId)}
+
 <h:form id="orders">
-<h:outputText value="#{orderService.selectedOrder.id}" rendered="#{not empty orderService.selectedOrder.id}"></h:outputText>
     <h:panelGrid id="grid1" columns="2" border="0">
-        <h:outputText value="Customer"/>
+        <h:outputText value="Order ID:"/>
+    	<h:outputText value="#{orderService.selectedOrder.id}" rendered="#{not empty orderService.selectedOrder.id}"></h:outputText>
+        <h:outputText value="Customer:"/>
 		<h:selectOneMenu value="#{orderService.selectedOrder.customerId}" rendered="#{empty orderService.selectedOrder.id}">
 			<f:selectItems value="#{orderService.customers}" var="customer" itemLabel="#{customer.name}" itemValue="#{customer.id}"/>
 		</h:selectOneMenu>
-		<h:outputText value="#{orderService.selectedOrder.customerId}" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:outputText value="#{orderService.selectedOrder.customerName}" rendered="#{not empty orderService.selectedOrder.id}"/>
 		
-		<h:outputText value="Date" rendered="#{not empty orderService.selectedOrder.id}"/>
+		<h:outputText value="Date:" rendered="#{not empty orderService.selectedOrder.id}"/>
 		<h:outputText value="#{orderService.selectedOrder.date}" rendered="#{not empty orderService.selectedOrder.id}"/>
 		
 		
@@ -33,13 +32,14 @@
         	action="#{orderService.saveOrder}"
             process="@this"/>
 	</h:panelGrid>
+
 	
 	<h:dataTable border="1" rendered="#{not empty orderService.selectedOrder.id}" value="#{orderService.orderLines}" var="o">
 		<h:column><f:facet name="header">Line Id</f:facet>
 		<h:outputText value="#{o.id}"></h:outputText>
 		</h:column>
-		<h:column><f:facet name="header">Product Id</f:facet>
-		<h:outputText value="#{o.productId}"></h:outputText>
+		<h:column><f:facet name="header">Product</f:facet>
+		<h:outputText value="#{o.productName}"></h:outputText>
 		</h:column>
 		<h:column><f:facet name="header">Purchase Price</f:facet>
 		<h:outputText value="#{o.purchasePrice}"></h:outputText>
@@ -50,7 +50,12 @@
 
 	</h:dataTable>
 	
-	<h:panelGrid id="theGrid2" columns="2" border="0">	
+	        <h:commandButton value="Add Order Line" 
+        		rendered="#{not empty orderService.selectedOrder.id}"
+        		onclick="document.getElementById('orders:theGrid2').style.display='block'; return false;">
+            </h:commandButton>
+	
+	<h:panelGrid id="theGrid2" columns="2" border="0" style="display:none">	
 		<h:outputText value="Product" rendered="#{not empty orderService.selectedOrder.id}"/>
 		<h:selectOneMenu value="#{orderService.selectedOrderLine.productId}" rendered="#{not empty orderService.selectedOrder.id}">
 			<f:selectItems value="#{orderService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/>

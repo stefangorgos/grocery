@@ -21,7 +21,9 @@ public class OrderRepository {
 	
 	public List<Order> getOrders() throws SQLException {
 		Statement statement = connection.createStatement();
-		ResultSet resultSet = statement.executeQuery("select orders.id as order_id, customer_id, customers.name, date, order_lines.id as lines_id, order_lines.product_id, order_lines.purchase_price, order_lines.quantity \r\n"
+		ResultSet resultSet = statement.executeQuery("select orders.id as order_id, customer_id, customers.name, date, \r\n"
+				+ "order_lines.id as lines_id, order_lines.product_id, order_lines.purchase_price, \r\n"
+				+ "order_lines.quantity \r\n"
 				+ "from orders \r\n"
 				+ "join order_lines on orders.id = order_lines.order_id \r\n"
 				+ "join customers on customer_id = customers.id\r\n"
@@ -80,7 +82,10 @@ public class OrderRepository {
 	
 	public List<OrderLine> getOrderLines(Integer orderId) throws SQLException {
 		List<OrderLine> orderLines = new ArrayList<>();
-		PreparedStatement statement = connection.prepareStatement("select id, order_id, product_id, purchase_price, quantity from order_lines where order_id = ?");
+		PreparedStatement statement = connection.prepareStatement("select order_lines.id, order_id, product_id, products.name, purchase_price, quantity \r\n"
+				+ "from order_lines \r\n"
+				+ "join products on product_id = products.id\r\n"
+				+ "where order_id = ?");
 		statement.setInt(1, orderId);
 		statement.execute();
 		ResultSet resultSet = statement.getResultSet();
@@ -91,6 +96,7 @@ public class OrderRepository {
 			orderLine.setId(resultSet.getInt("id"));
 			orderLine.setOrderId(resultSet.getInt("order_id"));
 			orderLine.setProductId(resultSet.getInt("product_id"));
+			orderLine.setProductName(resultSet.getString("name"));
 			orderLine.setPurchasePrice(resultSet.getDouble("purchase_price"));
 			orderLine.setQuantity(resultSet.getInt("quantity"));
 			orderLines.add(orderLine);
@@ -142,13 +148,17 @@ public class OrderRepository {
 	}
 	
 	public Order getOrderById(int selectedOrderId) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement("select * from orders where id = ?");
+		PreparedStatement statement = connection.prepareStatement("select * from orders\r\n"
+				+ "join customers on orders.customer_id = customers.id\r\n"
+				+ "where orders.id = ?");
 		statement.setInt(1, selectedOrderId);
 		statement.execute();
 		ResultSet resultSet = statement.getResultSet();
+		resultSet.next();
 		Order order = new Order();
 		order.setId(resultSet.getInt("id"));
 		order.setCustomerId(resultSet.getInt("customer_id"));
+		order.setCustomerName(resultSet.getString("name"));
 		order.setDate(resultSet.getDate("date"));	
 		
 		return order;

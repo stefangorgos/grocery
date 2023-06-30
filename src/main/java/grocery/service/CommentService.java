@@ -17,11 +17,15 @@ import grocery.repository.CommentRepository;
 @SessionScoped
 public class CommentService {
 	private CommentRepository commentRepository = new CommentRepository();
-	private Comment selectedComment;
+	private Comment selectedComment = new Comment();
 	private Product selectedProduct;
 	
-	public void init() {
-		selectedComment = new Comment();
+	public void init() throws SQLException {
+		if (selectedComment.getId() == null) {
+			selectedComment = new Comment();
+		} else {
+			selectedComment = commentRepository.getCommentById(selectedComment.getId());
+		}
 		selectedProduct = new Product();
 		selectedComment.setProduct(selectedProduct);
 	}
@@ -50,6 +54,10 @@ public class CommentService {
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
+	}
+	
+	public void updateComment() throws SQLException {
+		commentRepository.updateComment(selectedComment);
 	}
 	
 	public Comment getSelectedComment() {
