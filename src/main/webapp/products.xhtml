@@ -1,17 +1,17 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
-<h:head>
-    <title><h:outputText value="#{msg['message.welcome']}"/></title>
-</h:head>
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="templates/template.xhtml">
+
 <f:metadata>
     <f:event type="preRenderView" listener="#{productService.init()}"/>
 </f:metadata>
 
-<body>
-
+<ui:define name="about">
+</ui:define>
+	
+<ui:define name="content">
 	<h:dataTable border="1" value="#{productService.products}" var="p">
 	<h:column>
 		<f:facet name="header">Product ID</f:facet>
@@ -48,10 +48,10 @@
 		<f:facet name="header">Product Type</f:facet>
 		<h:outputText value="#{p['class'].simpleName}"></h:outputText>
 	</h:column>
-	
-	
-	
 	</h:dataTable>
+</ui:define>
 
-</body>
-</html>
+</ui:composition>
+
+
+
