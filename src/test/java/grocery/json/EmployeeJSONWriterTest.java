@@ -62,7 +62,7 @@ public class EmployeeJSONWriterTest {
 		emp.setId(100);
 		emp.setName("David");
 		emp.setPermanent(false);
-		emp.setPhoneNumbers(new long[] { 123456, 987654 });
+		emp.setPhoneNumbers(new Long[] {123456L, 987654L});
 		emp.setRole("Manager");
 
 		Address add = new Address();

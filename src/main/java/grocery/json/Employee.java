@@ -4,17 +4,17 @@ import java.util.Arrays;
 
 public class Employee {
 
-	private int id;
+	private Integer id;
 	private String name;
 	private boolean permanent;
 	private Address address;
-	private long[] phoneNumbers;
+	private Long[] phoneNumbers;
 	private String role;
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 	public String getName() {
@@ -35,10 +35,10 @@ public class Employee {
 	public void setAddress(Address address) {
 		this.address = address;
 	}
-	public long[] getPhoneNumbers() {
+	public Long[] getPhoneNumbers() {
 		return phoneNumbers;
 	}
-	public void setPhoneNumbers(long[] phoneNumbers) {
+	public void setPhoneNumbers(Long[] phoneNumbers) {
 		this.phoneNumbers = phoneNumbers;
 	}
 	public String getRole() {

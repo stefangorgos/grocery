@@ -42,12 +42,6 @@ public class EmployeeJSONReader {
 		jsonReader.close();
 		fis.close();
 		
-		
-		for (int i=0; i<jsonArray.size(); i++) {
-			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
-		}
-				
-			
 		//Retrieve data from JsonObject and create Employee bean
 		JsonObject jsonObject = jsonReader.readObject();
 		Employee emp = new Employee();
@@ -59,7 +53,7 @@ public class EmployeeJSONReader {
 		
 		//reading arrays from json
 		JsonArray jsonPhoneArray = jsonObject.getJsonArray("phoneNumbers");
-		long[] numbers = new long[jsonPhoneArray.size()];
+		Long[] numbers = new Long[jsonPhoneArray.size()];
 		int index = 0;
 		for(JsonValue value : jsonPhoneArray){
 			numbers[index++] = Long.parseLong(value.toString());

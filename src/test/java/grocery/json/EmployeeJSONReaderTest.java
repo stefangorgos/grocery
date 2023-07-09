@@ -13,6 +13,8 @@ import javax.json.JsonStructure;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 public class EmployeeJSONReaderTest {
 	private static final String JSON_FILE="in_employee.txt";
 	private static final URL URL = EmployeeJSONReader.class.getClassLoader().getResource(JSON_FILE);
@@ -50,6 +52,23 @@ public class EmployeeJSONReaderTest {
 			System.out.println();
 			System.out.printf("\tkeys: %s, values: %s", jsonObject.get("id"), jsonObject.asJsonObject().values());
 			System.out.println();
+		}
+	}
+	
+	@Test
+	public void testJsonArrayConvert() throws IOException {
+		InputStream fis = new FileInputStream(FILE_NAME);
+		JsonReader jsonReader = Json.createReader(fis);
+		JsonArray jsArr = jsonReader.readArray();
+		jsonReader.close();
+		fis.close();
+		
+		ObjectMapper jsonMapper = new ObjectMapper();
+		
+		for (int i=0; i<jsArr.size(); i++) {
+			JsonObject jsonObject = (JsonObject) jsArr.get(i);
+			Employee employee = jsonMapper.readValue(jsonObject.toString(), Employee.class);
+			System.out.println(employee);
 		}
 	}
 }
