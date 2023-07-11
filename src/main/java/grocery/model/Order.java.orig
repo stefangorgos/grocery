@@ -8,11 +8,7 @@ public class Order {
 	private Integer customerId;
 	private String customerName;
 	private Date date;
-<<<<<<< HEAD
-	private ArrayList<OrderLine> orderLine;
-=======
 	private ArrayList<OrderLine> orderLines;
->>>>>>> b99991d (adaugare order json)
 	
 	public Integer getId() {
 		return id;
@@ -36,7 +32,7 @@ public class Order {
 <<<<<<< HEAD
 		return orderLine;
 	}
-	public void setOrderLines(ArrayList<OrderLine> orderLine) {
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
 		this.orderLine = orderLine;
 	}
 	public String getCustomerName() {

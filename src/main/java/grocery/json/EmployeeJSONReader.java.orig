@@ -1,0 +1,89 @@
+package grocery.json;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+
+import javax.json.Json;
+import javax.json.JsonArray;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonStructure;
+import javax.json.JsonValue;
+
+public class EmployeeJSONReader {
+
+	private static final String JSON_FILE="employees.txt";
+	private static final URL URL = EmployeeJSONReader.class.getClassLoader().getResource(JSON_FILE);
+	private static final String FILE_NAME = URL.getFile();
+	
+	public static void main(String[] args) throws IOException {
+
+		InputStream fis = new FileInputStream(FILE_NAME);
+		JsonReader jsonReader = Json.createReader(fis);
+		JsonStructure jsonStrunvture = jsonReader.read();
+		jsonReader.close();
+		fis.close();
+		
+		JsonArray jsArr = jsonStrunvture.asJsonArray();
+		for (int i=0; i<jsArr.size(); i++) {
+			JsonObject jsonObject = (JsonObject) jsArr.get(i);
+			System.out.printf("i=%s, keys: %s, values: %s", i, jsonObject.asJsonObject().keySet(), jsonObject.asJsonObject().values());
+			System.out.println();
+		}
+		
+
+		fis = new FileInputStream(FILE_NAME);
+		jsonReader = Json.createReader(fis);
+
+		JsonArray jsonArray = jsonReader.readArray();
+		System.out.println(jsonArray.toString());
+		jsonReader.close();
+		fis.close();
+		
+<<<<<<< HEAD
+=======
+		
+		for (int i=0; i<jsonArray.size(); i++) {
+			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
+		}
+				
+			
+>>>>>>> 1ff7427 (Exemple json)
+		//Retrieve data from JsonObject and create Employee bean
+		JsonObject jsonObject = jsonReader.readObject();
+		Employee emp = new Employee();
+		
+		emp.setId(jsonObject.getInt("id"));
+		emp.setName(jsonObject.getString("name"));
+		emp.setPermanent(jsonObject.getBoolean("permanent"));
+		emp.setRole(jsonObject.getString("role"));
+		
+		//reading arrays from json
+		JsonArray jsonPhoneArray = jsonObject.getJsonArray("phoneNumbers");
+<<<<<<< HEAD
+		Long[] numbers = new Long[jsonPhoneArray.size()];
+=======
+		long[] numbers = new long[jsonPhoneArray.size()];
+>>>>>>> 1ff7427 (Exemple json)
+		int index = 0;
+		for(JsonValue value : jsonPhoneArray){
+			numbers[index++] = Long.parseLong(value.toString());
+		}
+		emp.setPhoneNumbers(numbers);
+		
+		//reading inner object from json object
+		JsonObject innerJsonObject = jsonObject.getJsonObject("address");
+		Address address = new Address();
+		address.setStreet(innerJsonObject.getString("street"));
+		address.setCity(innerJsonObject.getString("city"));
+		address.setZipcode(innerJsonObject.getInt("zipcode"));
+		emp.setAddress(address);
+		
+		//print employee bean information
+		System.out.println(emp);
+		
+	}
+
+}
