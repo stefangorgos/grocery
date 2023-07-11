@@ -15,7 +15,7 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
-import org.apache.catalina.filters.AddDefaultCharsetFilter.ResponseWrapper;
+//import org.apache.catalina.filters.AddDefaultCharsetFilter.ResponseWrapper;
 
 @WebFilter
 public class DubleWordFilter extends HttpFilter implements Filter {

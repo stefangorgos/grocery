@@ -8,7 +8,7 @@ public class Order {
 	private Integer customerId;
 	private String customerName;
 	private Date date;
-	private ArrayList<OrderLine> orderLine;
+	private ArrayList<OrderLine> orderLines;
 	
 	public Integer getId() {
 		return id;
@@ -31,7 +31,7 @@ public class Order {
 	public ArrayList<OrderLine> getOrderLines() {
 		return orderLine;
 	}
-	public void setOrderLines(ArrayList<OrderLine> orderLine) {
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
 		this.orderLine = orderLine;
 	}
 	public String getCustomerName() {

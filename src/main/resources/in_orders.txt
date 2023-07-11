@@ -1,0 +1,40 @@
+[{
+	"id":1,
+	"customer_id":1,
+	"date":"2023-01-01",
+	"order_lines":[{
+		"id":1,
+		"product_id":7,
+		"purchase_price":80.0,
+		"quantity":3
+	},
+	{
+		"id":3,
+		"product_id":1,
+		"purchase_price":30.0,
+		"quantity":5
+	}]
+},
+{
+	"id":2,
+	"customer_id":2,
+	"date":"2023-01-01",
+	"order_lines":[{
+		"id":2,
+		"product_id":5,
+		"purchase_price":150.0,
+		"quantity":2
+	},
+	{
+		"id":4,
+		"product_id":7,
+		"purchase_price":90.0,
+		"quantity":1
+	},
+	{
+		"id":5,
+		"product_id":6,
+		"purchase_price":200.0,
+		"quantity":6
+	}]
+}]

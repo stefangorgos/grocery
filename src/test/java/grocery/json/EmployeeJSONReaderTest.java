@@ -31,10 +31,10 @@ public class EmployeeJSONReaderTest {
 		JsonArray jsArr = (JsonArray) jsonStrunvture;
 		for (int i=0; i<jsArr.size(); i++) {
 			JsonObject jsonObject = (JsonObject) jsArr.get(i);
-			System.out.printf("i=%s: id=%s, address=%s", i, jsonObject.get("id"),  jsonObject.get("address"));
+			System.out.printf("i=%s: id=%s, address=%s", i, jsonObject.get("id"),  ((JsonObject) jsonObject.get("address")).get("street"));
 			System.out.println();
-			System.out.printf("\tkeys: %s, values: %s", jsonObject.get("id"), jsonObject.asJsonObject().values());
-			System.out.println();
+//			System.out.printf("\tkeys: %s, values: %s", jsonObject.get("id"), jsonObject.asJsonObject().values());
+//			System.out.println();
 		}
 	}
 	
