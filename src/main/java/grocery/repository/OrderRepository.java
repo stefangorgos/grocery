@@ -69,10 +69,10 @@ public class OrderRepository {
 				orders.add(order);
 			}
 			orderLine = new OrderLine();
-			orderLine.setId((Integer)resultSetAsList.get(i)[4]);
-			orderLine.setProductId((Integer)resultSetAsList.get(i)[5]);
-			orderLine.setPurchasePrice(Double.valueOf(resultSetAsList.get(i)[6].toString()));
-			orderLine.setQuantity((Integer)resultSetAsList.get(i)[7]);
+			orderLines.setLines_id((Integer)resultSetAsList.get(i)[3]);
+			orderLines.setProduct_id((Integer)resultSetAsList.get(i)[4]);
+			orderLines.setPurchase_price(Double.valueOf(resultSetAsList.get(i)[5].toString()));
+			orderLines.setQuantity((Integer)resultSetAsList.get(i)[6]);
 			order.getOrderLines().add(orderLine);
 					
 		}
