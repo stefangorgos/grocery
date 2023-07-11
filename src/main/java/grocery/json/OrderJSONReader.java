@@ -41,7 +41,7 @@ public class OrderJSONReader {
 			Order order = new Order();
 			JsonObject jsonObject = (JsonObject) jsonArray.get(i);
 			order.setId(jsonObject.getInt("id"));
-			order.setCustomer_id(jsonObject.getInt("customer_id"));
+			order.setCustomerId(jsonObject.getInt("customer_id"));
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date date = null;
 			try {
@@ -56,11 +56,11 @@ public class OrderJSONReader {
 			for (int j=0; j<innerJsonArray.size();j++) {
 				JsonObject innerJsonObject = (JsonObject) innerJsonArray.get(i);
 				OrderLine orderLine = new OrderLine();
-				orderLine.setLines_id(innerJsonObject.getInt("id"));
-				orderLine.setOrder_id(jsonObject.getInt("id"));
-				orderLine.setProduct_id(innerJsonObject.getInt("product_id"));
+				orderLine.setId(innerJsonObject.getInt("id"));
+				orderLine.setOrderId(jsonObject.getInt("id"));
+				orderLine.setProductId(innerJsonObject.getInt("product_id"));
 				final JsonNumber purchasePriceAsString = innerJsonObject.getJsonNumber("purchase_price");
-				orderLine.setPurchase_price(purchasePriceAsString.doubleValue());
+				orderLine.setPurchasePrice(purchasePriceAsString.doubleValue());
 				orderLine.setQuantity(innerJsonObject.getInt("quantity"));
 				order.getOrderLines().add(orderLine);
 			}

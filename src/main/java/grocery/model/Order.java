@@ -29,10 +29,10 @@ public class Order {
 		this.date = date;
 	}
 	public ArrayList<OrderLine> getOrderLines() {
-		return orderLine;
+		return orderLines;
 	}
 	public void setOrderLines(ArrayList<OrderLine> orderLines) {
-		this.orderLine = orderLine;
+		this.orderLines = orderLines;
 	}
 	public String getCustomerName() {
 		return customerName;
