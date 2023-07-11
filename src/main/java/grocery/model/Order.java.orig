@@ -1,0 +1,56 @@
+package grocery.model;
+
+import java.util.Date;
+import java.util.ArrayList;
+
+public class Order {
+	private Integer id;
+	private Integer customerId;
+	private String customerName;
+	private Date date;
+<<<<<<< HEAD
+	private ArrayList<OrderLine> orderLine;
+=======
+	private ArrayList<OrderLine> orderLines;
+>>>>>>> b99991d (adaugare order json)
+	
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+	public Integer getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+	public Date getDate() {
+		return date;
+	}
+	public void setDate(Date date) {
+		this.date = date;
+	}
+	public ArrayList<OrderLine> getOrderLines() {
+<<<<<<< HEAD
+		return orderLine;
+	}
+	public void setOrderLines(ArrayList<OrderLine> orderLine) {
+		this.orderLine = orderLine;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+=======
+		return orderLines;
+	}
+	public void setOrderLines(ArrayList<OrderLine> orderLines) {
+		this.orderLines = orderLines;
+>>>>>>> b99991d (adaugare order json)
+	}
+
+	
+}
