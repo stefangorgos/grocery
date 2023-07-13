@@ -42,9 +42,7 @@ public class Order {
 	}
 	@Override
 	public String toString() {
-		return "Order [id=" + id + ", customerId=" + customerId + ", date=" + date + ", orderLine=" + orderLine + "]";
-	}
-
-	
-	
+		return "Order [id=" + id + ", customerId=" + customerId + ", customerName=" + customerName + ", date=" + date
+				+ ", orderLines=" + orderLines + "]";
+	}	
 }
