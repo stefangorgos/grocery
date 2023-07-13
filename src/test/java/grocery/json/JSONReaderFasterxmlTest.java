@@ -8,10 +8,13 @@ import java.nio.file.Paths;
 
 import org.junit.Test;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.exc.StreamReadException;
 import com.fasterxml.jackson.databind.DatabindException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import grocery.model.OrderLine;
 
 public class JSONReaderFasterxmlTest {
 	private static final String JSON_FILE="in_employee.txt";
@@ -37,6 +40,23 @@ public class JSONReaderFasterxmlTest {
 		System.out.println("Employee Objects\n"+emps);
 		for (Employee emp: emps) {
 			System.out.println(emp);
+		}
+	}
+	
+	@Test
+	public void testFasterxml2() throws IOException {
+		String JSON_FILE = "in_shipments.txt";
+		URL URL = JSONReaderFasterxmlTest.class.getClassLoader().getResource(JSON_FILE);
+		String FILE_NAME = URL.getFile();
+		Path filePath = Paths.get(FILE_NAME.substring(1));
+		byte[] jsonData = Files.readAllBytes(filePath.toAbsolutePath());
+
+		ObjectMapper objectMapper = new ObjectMapper();
+
+		Shipment[] shipments = objectMapper.readValue(jsonData, Shipment[].class);
+		
+		for (Shipment shipment : shipments) {
+			System.out.println(shipment);
 		}
 	}
 }

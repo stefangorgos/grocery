@@ -1,40 +1,45 @@
 [{
 	"id":1,
-	"customer_id":1,
+	"customerId":1,
 	"date":"2023-01-01",
-	"order_lines":[{
+	"orderLines":[{
 		"id":1,
-		"product_id":7,
-		"purchase_price":80.0,
+		"orderId":1,
+		"productId":7,
+		"purchasePrice":80.0,
 		"quantity":3
 	},
 	{
 		"id":3,
-		"product_id":1,
-		"purchase_price":30.0,
+		"orderId":1,
+		"productId":1,
+		"purchasePrice":30.0,
 		"quantity":5
 	}]
 },
 {
 	"id":2,
-	"customer_id":2,
+	"customerId":2,
 	"date":"2023-01-01",
-	"order_lines":[{
+	"orderLines":[{
 		"id":2,
-		"product_id":5,
-		"purchase_price":150.0,
+		"orderId":2,
+		"productId":5,
+		"purchasePrice":150.0,
 		"quantity":2
 	},
 	{
 		"id":4,
-		"product_id":7,
-		"purchase_price":90.0,
+		"orderId":2,
+		"productId":7,
+		"purchasePrice":90.0,
 		"quantity":1
 	},
 	{
 		"id":5,
-		"product_id":6,
-		"purchase_price":200.0,
+		"orderId":2,
+		"productId":6,
+		"purchasePrice":200.0,
 		"quantity":6
 	}]
 }]

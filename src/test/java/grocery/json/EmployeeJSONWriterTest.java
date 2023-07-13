@@ -55,6 +55,52 @@ public class EmployeeJSONWriterTest {
 		jsonWriter.close();
 	}
 	
+	@Test
+	public void testBuildEmployee2() throws FileNotFoundException {
+		Employee emp = new Employee();
+		emp.setId(100);
+		emp.setName("Matei");
+		emp.setPermanent(false);
+		emp.setPhoneNumbers(new Long[] {654321L, 121212L});
+		emp.setRole("Coder");
+
+		Address add = new Address();
+		add.setCity("Chisinau");
+		add.setStreet("Stefan cel mare");
+		add.setZipcode(2005);
+		emp.setAddress(add);
+		
+		JsonObjectBuilder empBuilder = Json.createObjectBuilder();
+		JsonObjectBuilder addressBuilder = Json.createObjectBuilder();
+		JsonArrayBuilder phoneNumBuilder = Json.createArrayBuilder();
+		
+		for (long phone : emp.getPhoneNumbers()) {
+			phoneNumBuilder.add(phone);
+		}
+		
+		addressBuilder.add("street", emp.getAddress().getStreet())
+						.add("city", emp.getAddress().getCity())
+							.add("zipcode", emp.getAddress().getZipcode());
+		
+		empBuilder.add("id", emp.getId())
+					.add("name", emp.getName())
+						.add("permanent", emp.isPermanent())
+							.add("role", emp.getRole());
+		
+		empBuilder.add("phoneNumbers", phoneNumBuilder);
+		empBuilder.add("address", addressBuilder);
+		
+		JsonObject empJsonObject = empBuilder.build();
+		
+		System.out.println("Employee JSON String\n"+empJsonObject);
+		
+		//write to file
+		OutputStream os = new FileOutputStream("src\\main\\resources\\out_employee.txt");
+		JsonWriter jsonWriter = Json.createWriter(os);
+		jsonWriter.writeObject(empJsonObject);
+		jsonWriter.close();
+	}
+	
 
 	public static Employee createEmployee() {
 

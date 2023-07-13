@@ -1,0 +1,15 @@
+[{
+	"id":123,
+	"quantity":3000,
+	"description":"rather big shipment"
+},
+{
+	"id":124,
+	"quantity":20,
+	"description":"small shipment"
+},
+{
+	"id":125,
+	"quantity":1,
+	"description":"single package"
+}]

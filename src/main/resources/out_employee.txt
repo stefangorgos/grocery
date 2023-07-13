@@ -1,1 +1,1 @@
-{"id":100,"name":"David","permanent":false,"role":"Manager","phoneNumbers":[123456,987654],"address":{"street":"BTM 1st Stage","city":"Bangalore","zipcode":560100}}
+{"id":100,"name":"Matei","permanent":false,"role":"Coder","phoneNumbers":[654321,121212],"address":{"street":"Stefan cel mare","city":"Chisinau","zipcode":2005}}

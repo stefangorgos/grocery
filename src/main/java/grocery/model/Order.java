@@ -40,6 +40,11 @@ public class Order {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
+	@Override
+	public String toString() {
+		return "Order [id=" + id + ", customerId=" + customerId + ", date=" + date + ", orderLine=" + orderLine + "]";
+	}
 
+	
 	
 }
