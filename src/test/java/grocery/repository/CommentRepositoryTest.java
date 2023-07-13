@@ -46,6 +46,7 @@ public class CommentRepositoryTest {
 		comment.setRating(7);
 		Product product = productRepository.readProduct(1);
 		comment.setProduct(product);
+		comment.setProductId(product.getId());
 		int rowsInserted = commentRepository.addComment(comment);
 		assertEquals(1, rowsInserted);
 	}
@@ -61,6 +62,7 @@ public class CommentRepositoryTest {
 		comment.setRating(8);
 		Product product = productRepository.readProduct(1);
 		comment.setProduct(product);
+		comment.setProductId(product.getId());
 		comment = commentRepository.persisteComment(comment);
 		assertTrue(comment.getId() > 1);
 	}
@@ -76,6 +78,7 @@ public class CommentRepositoryTest {
 		comment.setId(18);
 		Product product = productRepository.readProduct(3);
 		comment.setProduct(product);
+		comment.setProductId(product.getId());
 		int rowsInserted = commentRepository.updateComment(comment);
 		assertEquals(1, rowsInserted);
 	}
