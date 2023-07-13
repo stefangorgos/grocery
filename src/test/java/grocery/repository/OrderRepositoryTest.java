@@ -45,9 +45,9 @@ public class OrderRepositoryTest {
 		}
 		order.setDate(date);
 		
-		orderLine.setOrderId(order.getId());
-		orderLine.setProductId(6);
-		orderLine.setPurchasePrice(300.00);
+		orderLine.setOrder_id(order.getId());
+		orderLine.setProduct_id(6);
+		orderLine.setPurchase_price(300.00);
 		orderLine.setQuantity(3);
 		orderRepository.createOrderDetails(order, orderLine);
 	}
