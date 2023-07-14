@@ -1,7 +1,9 @@
 package grocery.rest;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.nio.CharBuffer;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -27,6 +29,21 @@ public class CommentREST extends HttpServlet {
 		} catch (SQLException e) {
 			throw new ServletException(e);
 		}
+		PrintWriter out = response.getWriter();
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        out.print(respon);
+        out.flush();   
+	}
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    BufferedReader reader = request.getReader();
+	    char[] content = new char[request.getContentLength()];
+	    reader.read(content);
+	    String data = new String(content);
+	    System.out.println(data);
+	    
+		String respon = new String("{\"response\": \"OK!\"}");
 		PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
