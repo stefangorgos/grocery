@@ -43,6 +43,8 @@ public class CommentREST extends HttpServlet {
 	    String data = new String(content);
 	    System.out.println(data);
 	    
+//	    request.getRequestDispatcher("/index.jsf").forward(request, response);
+	    
 		String respon = new String("{\"response\": \"OK!\"}");
 		PrintWriter out = response.getWriter();
         response.setContentType("application/json");
