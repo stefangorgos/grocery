@@ -3,7 +3,6 @@ package grocery.rest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.nio.CharBuffer;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
