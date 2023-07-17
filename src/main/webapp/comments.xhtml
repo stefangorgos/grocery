@@ -12,7 +12,8 @@
 </ui:define>
 
 <ui:define name="content">
-	<h:dataTable border="1" value="#{commentService.comments}" var="c">
+	<div class="table-wrapper">
+	<h:dataTable border="1" value="#{commentService.comments}" var="c" class="fl-table">
 	
 	<h:column>
 		<f:facet name="header">ID</f:facet>
@@ -37,13 +38,15 @@
 		<h:outputText value="#{c.rating}"></h:outputText>
 	</h:column>
 	</h:dataTable>
+	</div>
 
 	<br />
-	
+	<div style="padding-bottom: 200px; padding-top: 50px">
 	<h:outputLink value="comment.jsf">
 		<h:outputText value="Add new Comment"></h:outputText>
 		<f:param name="selectedCommentId" value="#{null}"/>
 	</h:outputLink>
+	</div>
 </ui:define>
 
 </ui:composition>
