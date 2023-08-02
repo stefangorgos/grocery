@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productService.init()}"/>"/>
+</f:metadata>
+
+<body>
+
+<form action="CommentServlet" method="post">
+ 		<h:selectOneMenu name="product_id" id="product_id">
+			<f:selectItems value="#{productService.products}" var="product" itemLabel="#{product.name}" itemValue="#{product.id}"/><br />
+		</h:selectOneMenu><br /> 
+		
+        <input type="text" name="text"/><br />
+        
+        <input type="date" name="date"/><br />
+
+        <input type="number" name="rating"/><br />
+
+        <input type="submit" name="submit"/><br />
+</form>
+</body>
+</html>
+

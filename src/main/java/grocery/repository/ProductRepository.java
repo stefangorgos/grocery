@@ -20,10 +20,11 @@ public class ProductRepository {
 		connection = grocery.utils.DataBaseConnection.getConnnection();
 	}
 	public Product createProduct(Product product) throws SQLException {
-		PreparedStatement statement = connection.prepareStatement("INSERT INTO products (name, price, in_stock) VALUES (?, ?, ?) RETURNING id");
+		PreparedStatement statement = connection.prepareStatement("INSERT INTO products (name, price, in_stock, image_path) VALUES (?, ?, ?, ?) RETURNING id");
 		statement.setString(1, product.getName());
 		statement.setDouble(2, product.getPrice());
 		statement.setBoolean(3, product.getInStock());
+		statement.setString(4, product.getImagePath());
 		statement.execute();
 		ResultSet resultSet = statement.getResultSet();
 		resultSet.next();
@@ -50,15 +51,15 @@ public class ProductRepository {
 				+ "order by products.id asc");
 		while(resultSet.next()) {
 			if (resultSet.getDouble("discount") != 0.0) {
-				product = new ProductRetiree(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDouble("discount"));
+				product = new ProductRetiree(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getString("image_path"), resultSet.getDouble("discount"));
 			} else {
-				product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"));
+				product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getString("image_path"));
 			}
 			if (resultSet.getDate("expiration_date") != null) {
-				product = new ProductExpirables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDate("expiration_date"));
+				product = new ProductExpirables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getString("image_path"), resultSet.getDate("expiration_date"));
 			}
 			if (resultSet.getDate("start_date") != null) {
-				product = new ProductPerishables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getDate("expiration_date"), resultSet.getDouble("daily_discount"));
+				product = new ProductPerishables(resultSet.getInt("id"), resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getString("image_path"), resultSet.getDate("expiration_date"), resultSet.getDouble("daily_discount"));
 			}
 			product.setId(resultSet.getInt("id"));
 			products.add(product);		
@@ -74,7 +75,7 @@ public class ProductRepository {
 		resultSet.next();
 		
 		//de adaugat scanner de discount
-		Product product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"));
+		Product product = new Product(resultSet.getString("name"), resultSet.getDouble("price"), resultSet.getBoolean("in_stock"), resultSet.getString("image_path"));
 		product.setId(resultSet.getInt("id"));		
 		return product;
 	}

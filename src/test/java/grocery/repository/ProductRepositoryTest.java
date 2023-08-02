@@ -16,7 +16,7 @@ public class ProductRepositoryTest {
 	@Test
 	public void testCreateProduct() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
-		Product product = new Product("Lapte", 23.75, false);
+		Product product = new Product("Lapte", 23.75, false, null);
 		Product productSaved = productRepository.createProduct(product);
 		assertTrue(productSaved.getId() > 1);
 	}
@@ -24,7 +24,7 @@ public class ProductRepositoryTest {
 	@Test
 	public void testCreateProductRetiree() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
-		Product product = new ProductRetiree("Peste", 25.50, false, 0.2);
+		Product product = new ProductRetiree("Peste", 25.50, false, null, 0.2);
 		Product productSaved = productRepository.createProduct(product);
 		assertTrue(productSaved.getId() > 1);
 	}
@@ -62,7 +62,7 @@ public class ProductRepositoryTest {
 	@Test
 	public void testDeleteProduct() throws SQLException {
 		ProductRepository productRepository = new ProductRepository();
-		Product product = new Product("To be deleted", 23.75, false);
+		Product product = new Product("To be deleted", 23.75, false, null);
 		Product productSaved = productRepository.createProduct(product);
 		int productId = productSaved.getId();
 		productRepository.deleteProduct(productId);

@@ -76,8 +76,9 @@ public class ProductServlet extends HttpServlet {
 		product.setName(request.getParameter("name"));
 		product.setPrice(Double.valueOf(request.getParameter("price")));
 		product.setInStock(Boolean.valueOf(request.getParameter("instock")));
+		product.setImagePath(String.valueOf(request.getParameter("image_path")));
 		if (request.getParameter("discount") != null) {
-			product = new ProductRetiree(request.getParameter("name"), Double.valueOf(request.getParameter("price")), Boolean.valueOf(request.getParameter("instock" )), Double.valueOf(request.getParameter("discount")));
+			product = new ProductRetiree(request.getParameter("name"), Double.valueOf(request.getParameter("price")), Boolean.valueOf(request.getParameter("instock" )), String.valueOf(request.getParameter("image_path")), Double.valueOf(request.getParameter("discount")));
 		}
 		try {
 			productRepository.createProduct(product);

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -66,7 +67,7 @@ public class CommentServlet extends HttpServlet {
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
-		doGet(request, response);
+		request.getRequestDispatcher("comments.jsf").forward(request, response);
 	}
 
 }

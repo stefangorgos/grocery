@@ -8,14 +8,16 @@ public class Product {
     private Double price;
     private Boolean inStock;
     private List<Comment> comments;
+    private String imagePath;
 
 	public Product() {
 	}
 
-    public Product(String name, Double price, Boolean inStock) {
+    public Product(String name, Double price, Boolean inStock, String imagePath) {
         this.name = name;
         this.price = price;
         this.inStock = inStock;
+        this.imagePath = imagePath;
     }
 
 	public Integer getId() {
@@ -56,6 +58,16 @@ public class Product {
 
 	public void setComments(List<Comment> comments) {
 		this.comments = comments;
+	}
+	
+	
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
 	}
 
 	@Override

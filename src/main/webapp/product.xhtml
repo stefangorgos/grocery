@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+    <title><h:outputText value="#{msg['message.welcome']}"/></title>
+</h:head>
+
+<f:metadata>
+    <f:event type="preRenderView" listener="#{productService.init()}"/>
+    <f:viewParam name="selectedProductId" value="#{productService.selectedProduct.id}"/>
+</f:metadata>
+
+<body>
+<h:form id="products" enctype="multipart/form-data">
+    <h:panelGrid id="theGrid" columns="2" border="1">
+    	<h:outputText value="Product ID" rendered="#{not empty productService.selectedProduct.id}"></h:outputText>
+		<h:outputText value="#{productService.selectedProduct.id}" rendered="#{not empty productService.selectedProduct.id}"></h:outputText>
+    
+        <h:outputText value="Name"/>
+        <h:inputText id="name" value="#{productService.selectedProduct.name}"/>
+
+        <h:outputText value="Price"/>
+        <h:inputText  id="price" value="#{productService.selectedProduct.price}" converter="javax.faces.Number"/>
+        
+        <h:outputText value="In stock"/>
+        <h:selectBooleanCheckbox id="in_stock" value="#{productService.selectedProduct.inStock}"/>
+		
+		<h:outputText value="Imagine"/>
+		<h:inputFile value="#{productService.imageFile}"></h:inputFile>
+		
+        <h:commandButton value="Save #{msg['label.saveButton']}" 
+        	action="#{productService.saveProduct}"
+            process="@this"
+            rendered="#{empty productService.selectedProduct.id}"/>
+		    
+
+    </h:panelGrid>
+</h:form>
+</body>
+</html>
+

@@ -15,7 +15,9 @@
 	<h:dataTable border="1" value="#{productService.products}" var="p">
 	<h:column>
 		<f:facet name="header">Product ID</f:facet>
-		<h:outputText value="#{p.id}"></h:outputText>
+		<h:outputLink value="product.jsf"><h:outputText value="#{p.id}"/>
+			<f:param name="selectedProductId" value="#{p.id}"></f:param>
+		</h:outputLink>
 	</h:column>
 	<h:column>
 		<f:facet name="header">Name</f:facet>
@@ -28,6 +30,10 @@
 	<h:column>
 		<f:facet name="header">In stock</f:facet>
 		<h:outputText value="#{p.inStock}"></h:outputText>
+	</h:column>
+	<h:column>
+		<f:facet name="header">ImagePath</f:facet>
+		<h:graphicImage value="images/#{p.imagePath}" width="100px"></h:graphicImage>
 	</h:column>
 	<h:column>
 		<f:facet name="header">Retiree Discount</f:facet>

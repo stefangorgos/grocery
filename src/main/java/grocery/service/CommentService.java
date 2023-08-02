@@ -38,6 +38,14 @@ public class CommentService {
 		}
 	}
 	
+	public List<Comment> getAll() {
+		try {
+			return commentRepository.getComments();
+		} catch (SQLException e) {
+			return new ArrayList<>();
+		}
+	}
+	
 	public List<Comment> getCommentsByProduct(int productId) {
 		try {
 			return commentRepository.getCommentsByProduct(productId);

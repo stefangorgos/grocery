@@ -55,7 +55,7 @@ public class OrderRepository {
 		OrderLine orderLine;
 		Integer previousOrderId = -1;
 		
-		for(int i = 0; i < resultSetAsList.size() - 1; i++) {
+		for(int i = 0; i < resultSetAsList.size(); i++) {
 			final Integer currentOrderId = (Integer)resultSetAsList.get(i)[0];
 			if (!previousOrderId.equals(currentOrderId)) {
 				previousOrderId = currentOrderId;

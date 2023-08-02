@@ -1,2 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pageflow:Pageflow xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16875427268910" configfile="/grocery/src/main/webapp/WEB-INF/faces-config.xml"/>
+<pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf16875427268910" configfile="/grocery/src/main/webapp/WEB-INF/faces-config.xml">
+  <nodes xsi:type="pageflow:PFPage" name="comment.xhtml" x="122" y="178" id="pf16908921668280" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf16908921668281" path="/comment.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="comments" x="338" y="178" id="pf16908921668282" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf16908921668281" path="/comments.jsp"/>
+  <nodes xsi:type="pageflow:PFPage" name="order.xhtml" x="122" y="562" id="pf16908921668293" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf16908921668294" path="/order.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="order.jsf" x="338" y="562" id="pf16908921668295" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf16908921668294" path="/order.jsf"/>
+  <nodes xsi:type="pageflow:PFPage" name="product.xhtml" id="pf16908921668296" referenceLink="//@navigationRule.2/@fromViewId|" outlinks="pf16908921668297" path="/product.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="products.jsf" id="pf16908921668298" referenceLink="//@navigationRule.2/@navigationCase.0/@toViewId|" inlinks="pf16908921668297" path="/products.jsf"/>
+  <links id="pf16908921668281" target="pf16908921668282" source="pf16908921668280" outcome="comments" redirect="true"/>
+  <links id="pf16908921668294" target="pf16908921668295" source="pf16908921668293" outcome="orders" redirect="true"/>
+  <links id="pf16908921668297" target="pf16908921668298" source="pf16908921668296" outcome="products" redirect="true"/>
+</pageflow:Pageflow>

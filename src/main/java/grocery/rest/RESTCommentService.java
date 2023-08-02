@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -43,5 +44,32 @@ public class RESTCommentService {
 			throw new RuntimeException(e);
 		}
 	    
+	}
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/list-comments")
+	public List<Comment> listComments() {
+	    try {
+			List<Comment> comments = commentRepository.getComments();
+		    return comments;	
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		} 
+	}
+	@GET
+	@Path("/comments/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response get(@PathParam("id") int id) {
+	    Comment comment = null;
+		try {
+			comment = commentRepository.getCommentById(id);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	    if (comment != null) {
+	        return Response.ok(comment, MediaType.APPLICATION_JSON).build();
+	    } else {
+	        return Response.status(Response.Status.NOT_FOUND).build();
+	    }
 	}
 }
