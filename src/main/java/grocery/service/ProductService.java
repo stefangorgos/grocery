@@ -41,7 +41,6 @@ public class ProductService {
 			selectedProduct = productRepository.readProduct(selectedProduct.getId());
 		}
 		products = productRepository.readProducts();
-		selectedProduct = new Product();
 	}
 
 	public List<Product> getProducts() {
@@ -87,7 +86,31 @@ public class ProductService {
 		} catch (SQLException e) {
 			throw new IOException(e);
 		}
-		
-
+	}
+	
+	public String updateProduct() throws IOException {
+			
+		if(imageFile == null) {
+			selectedProduct.setImagePath(selectedProduct.getImagePath());
+		} else {
+			String fileName = String.valueOf(Paths.get(imageFile.getSubmittedFileName()));
+			File savedFile = new File("C:\\git\\grocery\\src\\main\\webapp\\images", fileName);
+			
+			try (InputStream input = imageFile.getInputStream()) {
+				Files.copy(input, savedFile.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+			String imagePath = String.valueOf(savedFile.getName());
+			selectedProduct.setImagePath(imagePath);
+		}
+				
+		try {
+			productRepository.updateProduct(selectedProduct);
+			return "products";
+		} catch (SQLException e) {
+			throw new IOException(e);
+		}
 	}
 }

@@ -35,6 +35,11 @@
         	action="#{productService.saveProduct}"
             process="@this"
             rendered="#{empty productService.selectedProduct.id}"/>
+            
+        <h:commandButton value="Update" 
+        	action="#{productService.updateProduct}"
+            process="@this"
+            rendered="#{not empty productService.selectedProduct.id}"/>
 		    
 
     </h:panelGrid>

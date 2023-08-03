@@ -81,11 +81,12 @@ public class ProductRepository {
 	}
 	
 	public void updateProduct(Product product) throws SQLException {
-	    PreparedStatement statement = connection.prepareStatement("UPDATE products set name=?, price=?, in_stock=? WHERE id=?");
+	    PreparedStatement statement = connection.prepareStatement("UPDATE products set name=?, price=?, in_stock=?, image_path=? WHERE id=?");
 	    statement.setString(1, product.getName());
 	    statement.setDouble(2, product.getPrice());
 	    statement.setBoolean(3, product.getInStock());
-	    statement.setInt(4, product.getId());
+	    statement.setString(4, product.getImagePath());
+	    statement.setInt(5, product.getId());
 	    statement.execute();
         if (product instanceof ProductRetiree) {
             statement = connection.prepareStatement("UPDATE product_retirees SET discount=? WHERE id=?");

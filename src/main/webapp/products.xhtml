@@ -55,6 +55,10 @@
 		<h:outputText value="#{p['class'].simpleName}"></h:outputText>
 	</h:column>
 	</h:dataTable>
+	<h:outputLink value="product.jsf">
+		<h:outputText value="Add new Product"></h:outputText>
+		<f:param name="selectedProductId" value="#{null}"/>
+	</h:outputLink>
 </ui:define>
 
 </ui:composition>
