@@ -11,7 +11,7 @@ import java.util.List;
 import grocery.dto.CustomerDTO;
 import grocery.model.Customer;
 
-public class CustomerRepository {
+public class CustomerRepository implements IRepository<Customer>{
 	private Connection connection;
 	
 	public CustomerRepository() {
@@ -79,7 +79,35 @@ public class CustomerRepository {
 	    statement.setInt(1, customerId);
 	    statement.execute();
 	}
-	
-	
 
+	public Customer readCustomer(int customerId) throws SQLException {
+		Statement statement = connection.createStatement();
+		ResultSet resultSet = statement.executeQuery("SELECT * FROM customers WHERE id >= " + customerId);
+	    resultSet.next();
+		Customer customer = new Customer();
+		customer.setId(resultSet.getInt("id"));
+		customer.setName(resultSet.getString("name"));
+		customer.setCustomerSince(resultSet.getDate("customer_since"));
+		return customer;
+	}
+
+
+	@Override
+	public List<Customer> getEntities() {
+		try {
+			return readCustomers();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+
+	@Override
+	public Customer getEntityById(Integer id) {
+		try {
+			return readCustomer(id);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

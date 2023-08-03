@@ -15,7 +15,7 @@ import grocery.model.Comment;
 import grocery.model.Product;
 import grocery.utils.DataBaseConnection;
 
-public class CommentRepository {
+public class CommentRepository implements IRepository<Comment>{
 	private Connection connection;
 	private static final Logger logger = LoggerFactory.getLogger(CommentRepository.class);
 	
@@ -166,5 +166,23 @@ public class CommentRepository {
 		statement.setDouble(4, comment.getRating().doubleValue());
 		statement.setInt(5, comment.getId());
 		return statement.executeUpdate();
+	}
+
+	@Override
+	public List<Comment> getEntities() {
+		try {
+			return getComments();
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	@Override
+	public Comment getEntityById(Integer id) {
+		try {
+			return getCommentById(id);
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
 	} 
 }
